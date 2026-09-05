@@ -3,6 +3,7 @@ import cors from "cors";
 
 import authRoutes from "./routes/auth.js";
 import ticketRoutes from "./routes/tickets.js";
+import assistantRoutes from "./routes/assistant.js";
 
 const app = express();
 
@@ -12,8 +13,9 @@ app.use(cors({ origin: CLIENT_URL }));
 app.use(express.json());
 
 app.get("/api/health", (req, res) => res.json({ ok: true, time: new Date().toISOString() }));
-app.use("/api/auth", authRoutes);
+app.use("/api/account", authRoutes);
 app.use("/api/tickets", ticketRoutes);
+app.use("/api/assistant", assistantRoutes);
 
 app.use((req, res) => res.status(404).json({ message: "Route not found" }));
 app.use((err, req, res, next) => {
